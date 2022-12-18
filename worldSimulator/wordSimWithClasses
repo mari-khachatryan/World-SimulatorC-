@@ -1,0 +1,131 @@
+#include <iostream>
+#include <string>
+#include <stdio.h>
+#include <string.h>
+
+class Sun {
+    public:
+        Sun() : light(false){};
+        //~Sun();
+        bool it_is_light(int time){
+            if(time > 0 && time <= 8) {
+                return true;
+            }
+            return false;
+        }
+    private:
+        bool light;
+}; 
+
+class Tree {
+    public:
+        // Tree();
+        // ~Tree();
+        void set_air(int t) {
+            air = t;
+        }
+        int get_air() {
+            return air;
+        }
+        bool get_oxygen(int time) {
+            if(sun.it_is_light(time)) {
+                air += 1;
+                return true;
+            }
+            return false;
+        }
+    private:
+        int air{};
+        Sun sun;
+};
+
+class Grass {
+    public:
+        // Grass();
+        // ~Grass();
+        void set_grass(int g) {
+            grass = g;
+        }
+        std::string get_grass() {
+            return grass;
+        }
+        void set_amount_of_grass(int g) {
+            grass = g;
+        }
+        int get_amount_of_grass() {
+            return amount_of_grass;
+        }
+        bool glass_is_eating(int time) {
+            if(tree.get_oxygen(time)) {
+                return true;
+            }
+            return false;
+        }
+     private:
+        Tree tree;
+        int amount_of_grass{};
+        std::string grass = "||||||||||";
+};
+
+class Frog {
+    public:
+        // Frog();
+        // ~Frog();
+        void is_awake(int time) {
+            if(tree.get_oxygen(time)) {
+                frog_is_awake = true;
+                std::cout << "Frog is awake" << std::endl;
+            }
+        }
+        void frog_breathes(int time) {
+            if(tree.get_oxygen(time)) {
+                std::cout << "the frog is breathing oxygen." << std::endl;
+            }
+        }
+        void frog_eating(int time) {
+            if(grasses.glass_is_eating(time)) {
+                std::cout << "frog eating glass" << std::endl;
+                std::string newGrass = grasses.get_grass();
+                while(weight != 15) {
+                    run_left++;
+                    std::cout << "the frog run left" << run_left << std::endl;
+                    weight++;
+                 }
+                 while (weight != 0)
+                 {
+                    std::cout << "and now the frog run right" << run_right << std::endl;
+                    weight--;
+                    run_right--;
+                 }
+                 
+                 
+            }
+        }
+    private:
+        Tree tree;
+        Grass grasses;
+        bool frog_is_awake{false};
+        int run_left{};
+        int run_right{};
+        int weight = 0;
+};
+
+int main() {
+    Sun sun;
+    const int time = 10;
+    Frog frog;
+    for(int time_now = 0; time_now < time; time_now++) {
+        if(sun.it_is_light(time_now)) {
+            std::cout << "It is " << time_now << ":00 o'clock." << std::endl;
+            frog.is_awake(time_now);
+            frog.frog_breathes(time_now);
+            frog.frog_eating(time_now);
+        } else {
+            std::cout << "Night, frog is sleeping! No bearthing, no eating" ;
+        }
+    }
+
+
+    return 0;
+}
+
